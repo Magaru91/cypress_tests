@@ -9,6 +9,7 @@ describe('Tests de tareas', () => {
   })
 
   it('marca una tarea como completada', () => {
+  
     cy.visit('http://todomvc-app-for-testing.surge.sh/')
 
     cy.get('.new-todo').type('Tarea 1{enter}')
