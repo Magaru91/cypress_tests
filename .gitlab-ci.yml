@@ -1,26 +1,3 @@
-image: node:latest
-
-cache:
-  paths:
-    - node_modules/
-    - /root/.cache/Cypress
-
-stages:
-  - build
-  - test
-  - deploy
-
-fase-de-construccion:
-  stage: build
-  script:
-    - echo "Estamos construyendo la aplicación"
-    - echo "Instalando dependencias..."
-    - npm install
-  artifacts:
-    paths:
-      - node_modules/
-    expire_in: 1 hour
-
 fase-de-pruebas-cypress:
   stage: test
   script:
@@ -36,10 +13,3 @@ fase-de-pruebas-cypress:
       - cypress/screenshots/
       - cypress/videos/
     expire_in: 1 hour
-
-fase-de-despliegue:
-  stage: deploy
-  script:
-    - echo "Estamos desplegando la aplicación"
-    - echo "........"
-    - echo "........"
