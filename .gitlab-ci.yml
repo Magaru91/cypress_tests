@@ -5,21 +5,17 @@ stages:
   - test
   - deploy
 
-
 fase-de-construccion:
   stage: build
   script:
-    - echo "Estamos construyendo tu aplicación"
-    - echo "........."
-    - echo "........."
-
+    - echo "Estamos construyendo la aplicación"
+    - echo "Instalando dependencias..."
+    - npm install
 
 fase-de-pruebas-cypress:
   stage: test
-  image: cypress/base:latest
+  image: cypress/included:3.8.3
   script:
-    - echo "Instalando dependencias..."
-    - npm install
     - echo "Ejecutando tests de Cypress..."
     - npx cypress run
   artifacts:
@@ -28,10 +24,9 @@ fase-de-pruebas-cypress:
       - cypress/screenshots/
       - cypress/videos/
 
-
 fase-de-despliegue:
   stage: deploy
   script:
-     - echo "Estamos Desplegando"
-     - echo "........"
-     - echo "........"
+    - echo "Estamos desplegando la aplicación"
+    - echo "........"
+    - echo "........"
