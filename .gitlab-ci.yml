@@ -8,13 +8,19 @@ stages:
 fase-de-construccion:
   stage: build
   script:
-    - echo "Estamos construyendo tu aplicación"
+    - echo "Estamos construyendo la aplicación"
     - echo "Instalando dependencias..."
     - npm install
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 hour
 
 fase-de-pruebas-cypress:
   stage: test
-  image: cypress/included:13.17.0
+  image:
+    name: cypress/included:13.17.0
+    entrypoint: [""]
   script:
     - echo "Ejecutando tests de Cypress..."
     - npx cypress run
@@ -23,10 +29,11 @@ fase-de-pruebas-cypress:
     paths:
       - cypress/screenshots/
       - cypress/videos/
+    expire_in: 1 hour
 
 fase-de-despliegue:
   stage: deploy
   script:
-    - echo "Estamos desplegando"
+    - echo "Estamos desplegando la aplicación"
     - echo "........"
     - echo "........"
