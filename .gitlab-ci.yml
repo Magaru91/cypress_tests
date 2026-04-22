@@ -1,5 +1,10 @@
 image: node:latest
 
+cache:
+  paths:
+    - node_modules/
+    - /root/.cache/Cypress
+
 stages:
   - build
   - test
@@ -18,13 +23,19 @@ fase-de-construccion:
 
 fase-de-pruebas-cypress:
   stage: test
-  image:
-    name: cypress/included:13.17.0
-    entrypoint: [""]
   script:
-    - echo "Ejecutando tests de Cypress..."
-    - npx cypress run
- 
+    - echo "Instalando dependencias..."
+    - npm install
+    - echo "Verificando Cypress..."
+    - npx cypress verify
+    - echo "Ejecutando test: cypress/e2e/MisTAREAS/mis_tests.cy.js"
+    - npx cypress run --spec "cypress/e2e/MisTAREAS/mis_tests.cy.js"
+  artifacts:
+    when: always
+    paths:
+      - cypress/screenshots/
+      - cypress/videos/
+    expire_in: 1 hour
 
 fase-de-despliegue:
   stage: deploy
