@@ -24,12 +24,7 @@ fase-de-pruebas-cypress:
   script:
     - echo "Ejecutando tests de Cypress..."
     - npx cypress run
-  artifacts:
-    when: always
-    paths:
-      - cypress/screenshots/
-      - cypress/videos/
-    expire_in: 1 hour
+ 
 
 fase-de-despliegue:
   stage: deploy
