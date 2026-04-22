@@ -1,0 +1,32 @@
+image: node:latest
+
+stages:
+  - build
+  - test
+  - deploy
+
+fase-de-construccion:
+  stage: build
+  script:
+    - echo "Estamos construyendo tu aplicación"
+    - echo "Instalando dependencias..."
+    - npm install
+
+fase-de-pruebas-cypress:
+  stage: test
+  image: cypress/included:13.17.0
+  script:
+    - echo "Ejecutando tests de Cypress..."
+    - npx cypress run
+  artifacts:
+    when: always
+    paths:
+      - cypress/screenshots/
+      - cypress/videos/
+
+fase-de-despliegue:
+  stage: deploy
+  script:
+    - echo "Estamos desplegando"
+    - echo "........"
+    - echo "........"
