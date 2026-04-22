@@ -1,15 +1,37 @@
+image: node:latest
+
+stages:
+  - build
+  - test
+  - deploy
+
+
+fase-de-construccion:
+  stage: build
+  script:
+    - echo "Estamos construyendo tu aplicación"
+    - echo "........."
+    - echo "........."
+
+
 fase-de-pruebas-cypress:
   stage: test
+  image: cypress/base:latest
   script:
     - echo "Instalando dependencias..."
     - npm install
-    - echo "Verificando Cypress..."
-    - npx cypress verify
-    - echo "Ejecutando test: cypress/e2e/MisTAREAS/mis_tests.cy.js"
-    - npx cypress run --spec "cypress/e2e/MisTAREAS/mis_tests.cy.js"
+    - echo "Ejecutando tests de Cypress..."
+    - npx cypress run
   artifacts:
     when: always
     paths:
       - cypress/screenshots/
       - cypress/videos/
-    expire_in: 1 hour
+
+
+fase-de-despliegue:
+  stage: deploy
+  script:
+     - echo "Estamos Desplegando"
+     - echo "........"
+     - echo "........"
