@@ -14,7 +14,7 @@ fase-de-construccion:
 
 fase-de-pruebas-cypress:
   stage: test
-  image: cypress/included:3.8.3
+  image: cypress/included:13.17.0
   script:
     - echo "Ejecutando tests de Cypress..."
     - npx cypress run
