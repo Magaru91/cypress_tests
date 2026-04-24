@@ -1,0 +1,229 @@
+{
+  "info": {
+    "_postman_id": "2d53f418-b781-4a6e-86f5-2dbcab169d7b",
+    "name": "Rick y Morty",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53794660",
+    "_collection_link": "https://go.postman.co/collection/53794660-2d53f418-b781-4a6e-86f5-2dbcab169d7b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "All characters",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://rickandmortyapi.com/api/character",
+          "protocol": "https",
+          "host": [
+            "rickandmortyapi",
+            "com"
+          ],
+          "path": [
+            "api",
+            "character"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Single Character",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://rickandmortyapi.com/api/character/827",
+          "protocol": "https",
+          "host": [
+            "rickandmortyapi",
+            "com"
+          ],
+          "path": [
+            "api",
+            "character",
+            "827"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Multiple Characters",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Devuelve 2 personajes\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.length).to.eql(2);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"El primer personaje es Rick\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData[0].name).to.eql(\"Rick Sanchez\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"El segundo personaje tiene id 183\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData[1].id).to.eql(183);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://rickandmortyapi.com/api/character/1,183",
+          "protocol": "https",
+          "host": [
+            "rickandmortyapi",
+            "com"
+          ],
+          "path": [
+            "api",
+            "character",
+            "1,183"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Filter character",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Todos los personajes están muertos\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "\r",
+              "    jsonData.results.forEach(personaje => {\r",
+              "        pm.expect(personaje.status).to.eql(\"Dead\");\r",
+              "    });\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://rickandmortyapi.com/api/character/?name=rick&status=dead",
+          "protocol": "https",
+          "host": [
+            "rickandmortyapi",
+            "com"
+          ],
+          "path": [
+            "api",
+            "character",
+            ""
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "rick"
+            },
+            {
+              "key": "status",
+              "value": "dead"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Personaje 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// 1. Status code 200\r",
+              "pm.test(\"Status code es 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "// 2. Nombre es Rick\r",
+              "pm.test(\"El nombre es Rick\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.name).to.eql(\"Rick Sanchez\");\r",
+              "});\r",
+              "\r",
+              "// 3. Tiempo de respuesta < 1 segundo\r",
+              "pm.test(\"Tiempo de respuesta menor a 1 segundo\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://rickandmortyapi.com/api/character/1\n",
+          "protocol": "https",
+          "host": [
+            "rickandmortyapi",
+            "com"
+          ],
+          "path": [
+            "api",
+            "character",
+            "1\n"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
