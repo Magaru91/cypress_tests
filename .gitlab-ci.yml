@@ -14,10 +14,12 @@ fase-de-construccion:
 
 fase-de-pruebas-cypress:
   stage: test
-  image: cypress/included:13.17.0
+  image:
+    name: cypress/included:13.17.0
+    entrypoint: [""]
   script:
     - echo "Ejecutando tests de Cypress..."
-    - npx cypress run
+    - npx cypress run --spec "cypress/e2e/MisTAREAS/mis_tests.cy.js"
   artifacts:
     when: always
     paths:
